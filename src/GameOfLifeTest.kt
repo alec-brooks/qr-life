@@ -4,12 +4,41 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class GameOfLifeTest {
-    @test fun canCheckAlive() {
-        val board = Board(arrayOf(arrayOf(Cell(0, 0, true))))
-        assertTrue { board.cellIsAlive(0,0) }
+    @test
+    fun canCheckAlive() {
+        val board = Board(listOf(listOf(true)))
+        assertTrue { board.cellIsAlive(0, 0) }
     }
-    @test fun notDefinedIsDead() {
-        val board = Board(arrayOf(arrayOf(Cell(0, 0, true))))
-        assertFalse { board.cellIsAlive(1,1) }
+
+    @test
+    fun outOfBoundsIsDead() {
+        val board = Board(listOf(listOf(true)))
+        assertFalse { board.cellIsAlive(1, 1) }
+    }
+
+    @test
+    fun countNeighboursForOne() {
+        val soloBoard = Board(listOf(listOf(true)))
+        assertEquals(soloBoard.countNeighbours(0, 0), 0)
+    }
+
+    @test
+    fun countNeighboursForHorizontal() {
+        val soloBoard = Board(
+            listOf(
+                listOf(true), listOf(true), listOf(true)
+            )
+        )
+        assertEquals(soloBoard.countNeighbours(1, 0), 2)
+    }
+
+    @test
+    fun countNeighboursForVertical() {
+        val soloBoard = Board(
+            listOf(
+                listOf(true, true, true)
+            )
+        )
+        assertEquals(soloBoard.countNeighbours(0, 1), 2)
     }
 }
