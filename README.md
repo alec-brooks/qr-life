@@ -1,1 +1,1 @@
-#QR Seed for Game of Life
+# QR Seed for Game of Life
