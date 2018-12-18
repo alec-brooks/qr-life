@@ -21,14 +21,13 @@ class Board(seed: List<List<Boolean>>) {
         ).sumBy { if (it) 1 else 0 }
     }
 
-    fun evolve(){
+    fun evolve() {
         cells = cells.mapIndexed { x, row ->
             row.mapIndexed { y, cell ->
                 if (countNeighbours(cell.x, cell.y) < 2 || countNeighbours(cell.x, cell.y) > 3)
                     Cell(x, y, false)
-                else if (countNeighbours(cell.x, cell.y) == 3){
+                else if (countNeighbours(cell.x, cell.y) == 3)
                     Cell(x, y, true)
-                }
                 else
                     cell
             }
