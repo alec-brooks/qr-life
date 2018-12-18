@@ -1,4 +1,13 @@
-class Cell(val x: Int, val y: Int, val alive: Boolean)
+class Cell(val x: Int, val y: Int, val alive: Boolean) {
+    fun evolve(neighboursCount: Int): Cell {
+        return if (neighboursCount < 2 || neighboursCount > 3)
+            Cell(x, y, false)
+        else if (neighboursCount == 3)
+            Cell(x, y, true)
+        else
+            this
+    }
+}
 
 
 class Board(seed: List<List<Boolean>>) {
@@ -22,14 +31,9 @@ class Board(seed: List<List<Boolean>>) {
     }
 
     fun evolve() {
-        cells = cells.mapIndexed { x, row ->
-            row.mapIndexed { y, cell ->
-                if (countNeighbours(cell.x, cell.y) < 2 || countNeighbours(cell.x, cell.y) > 3)
-                    Cell(x, y, false)
-                else if (countNeighbours(cell.x, cell.y) == 3)
-                    Cell(x, y, true)
-                else
-                    cell
+        cells = cells.map { row ->
+            row.map { cell ->
+                cell.evolve(countNeighbours(cell.x, cell.y))
             }
         }
     }
