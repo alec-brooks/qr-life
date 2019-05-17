@@ -37,4 +37,11 @@ class Board(seed: List<List<Boolean>>) {
             }
         }
     }
+
+    override fun toString(): String =
+        cells.joinToString(separator = "\n") { row ->
+            row.fold("") { rowString, cell ->
+                if (cell.alive) "${rowString}X" else "$rowString "
+            }
+        }
 }

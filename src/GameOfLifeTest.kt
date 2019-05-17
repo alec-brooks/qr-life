@@ -3,8 +3,8 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-val ALIVE = true
-val DEAD = false
+const val ALIVE = true
+const val DEAD = false
 
 class GameOfLifeTest {
     @test
@@ -26,7 +26,7 @@ class GameOfLifeTest {
     }
 
     @test
-    fun countNeighboursForHorizontal() {
+    fun countNeighboursForVertical() {
         val soloBoard = Board(
             listOf(
                 listOf(ALIVE), listOf(ALIVE), listOf(ALIVE)
@@ -36,7 +36,7 @@ class GameOfLifeTest {
     }
 
     @test
-    fun countNeighboursForVertical() {
+    fun countNeighboursForHorizontal() {
         val soloBoard = Board(
             listOf(
                 listOf(ALIVE, ALIVE, ALIVE)
@@ -109,5 +109,16 @@ class GameOfLifeTest {
         assertEquals(soloBoard.countNeighbours(0, 1), 3)
         soloBoard.evolve()
         assertTrue(soloBoard.cellIsAlive(0, 1))
+    }
+    @test
+    fun printBoard(){
+        val soloBoard = Board(
+            listOf(
+                listOf(ALIVE, DEAD, ALIVE),
+                listOf(DEAD, ALIVE, DEAD)
+
+            )
+        )
+        assertEquals("X X\n X ", soloBoard.toString())
     }
 }
